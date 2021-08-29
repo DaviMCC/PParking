@@ -1,0 +1,22 @@
+header{
+    background-color: #ffbd59;
+    padding: 20px 0;
+}
+.logo-header{
+    display: inline;
+}
+.caixa-apresentacao{
+    position: relative;
+    width: 940px; 
+    margin: 0 auto; 
+}
+.titulo-site{
+    position: absolute;
+    right: 10px;
+    top: 150px;
+    color:white;
+    font-size: 40px;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-weight: bold;
+}

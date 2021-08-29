@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "c:\\Users\\davic\\OneDrive\\Área de Trabalho\\PUC2021\\PUC_SEGUNDO_SEMESTRE\\HTML",
+      "environment": [],
+      "program": "c:\\Users\\davic\\OneDrive\\Área de Trabalho\\PUC2021\\PUC_SEGUNDO_SEMESTRE\\HTML\\build\\Debug\\outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "externalConsole": false
+    }
+  ]
+}
