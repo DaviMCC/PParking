@@ -53,6 +53,26 @@ header{
     background-color: #ee9d25;
     border-bottom: 4px solid #ffbd59;
     border-radius: 5px;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
     
+}
+body {
+    background-color: #ffbd59;
+    padding-bottom: 58px;
+}
+main{
+    width: 90vw;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+footer{
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 12px;
+    color: white;
+    padding: 10px;
+    background-color: #f58220;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
 }
