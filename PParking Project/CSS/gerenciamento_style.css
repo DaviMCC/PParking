@@ -32,12 +32,12 @@ header{
 }
 .acoes-de-busca{
     position: absolute;
-    width: 1150px;
+    width: 1050px;
 }
 .caixa-opcoes li{
     display: inline;
     margin-right: 15px;
-    padding: 14px;
+    padding: 10px;
 }
 .caixa-opcoes button{
     font-family: Montserrat;
@@ -59,20 +59,43 @@ header{
 body {
     background-color: #ffbd59;
     padding-bottom: 58px;
+    font-family: Montserrat;
+    font-size: 28px;
+    color: #ee9d25;
 }
+
+body h2{
+    padding-bottom: 15px;
+    font-weight: bold;
+
+}
+
+body table{
+    font-size: 20px;
+}
+
 main{
-    width: 90vw;
+    width: 80%;
     margin: 0 auto;
     padding: 30px 20px;
 }
+article{
+    background-color:cornsilk;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #f58220;
+}
+
 footer{
     text-align: center;
     font-family: Montserrat;
     font-size: 12px;
     color: white;
+    
     padding: 10px;
     background-color: #f58220;
     bottom: 0;
     position: fixed;
-    width: 100%;
+    width: 100%; 
 }
