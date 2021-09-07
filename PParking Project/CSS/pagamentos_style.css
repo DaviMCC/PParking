@@ -22,21 +22,24 @@ header{
 }
 body {
     background-color: #ffbd59;
-    padding-bottom: 58px;
 }
+
 main{
-    width: 90vw;
+    width: 80%;
     margin: 0 auto;
     padding: 30px 20px;
 }
-footer{
+
+footer{ 
+    padding: 10px 0px;
+    background: #f58220;
+    position: absolute;
+    width: 100%;
+}
+
+footer p{
     text-align: center;
     font-family: Montserrat;
-    font-size: 12px;
+    font-size: 14px;
     color: white;
-    padding: 10px;
-    background-color: #f58220;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
 }
