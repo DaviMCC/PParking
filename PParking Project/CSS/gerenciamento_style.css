@@ -58,7 +58,6 @@ header{
 }
 body {
     background-color: #ffbd59;
-    padding-bottom: 58px;
     font-family: Montserrat;
     font-size: 28px;
     color: #ee9d25;
@@ -79,23 +78,27 @@ main{
     margin: 0 auto;
     padding: 30px 20px;
 }
+
 article{
     background-color:cornsilk;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 2px solid #f58220;
+    height: 600px;
 }
 
-footer{
+
+footer{ 
+    padding: 10px 0px;
+    background: #f58220;
+    position: absolute;
+    width: 100%;
+}
+
+footer p{
     text-align: center;
     font-family: Montserrat;
-    font-size: 12px;
+    font-size: 14px;
     color: white;
-    
-    padding: 10px;
-    background-color: #f58220;
-    bottom: 0;
-    position: fixed;
-    width: 100%; 
 }
