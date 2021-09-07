@@ -5,6 +5,7 @@ header{
 .logo-header{
     display: inline;
 }
+
 .caixa-apresentacao{
     position: relative;
     width: 940px; 
@@ -20,6 +21,7 @@ header{
     font-family: Montserrat;
     font-weight: bold;
 }
+
 .caixa-opcoes{
     height: 70px;
     margin: 0 auto; 
@@ -56,6 +58,10 @@ header{
     transition-duration: 0.3s;
     
 }
+.caixa-opcoes li:active{
+    border-bottom: 4px solid cornsilk;
+}
+
 body {
     background-color: #ffbd59;
     font-family: Montserrat;
