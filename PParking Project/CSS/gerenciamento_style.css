@@ -1,10 +1,15 @@
+body {
+    font-family: Montserrat;
+}
 header{
     background-color: #ffbd59;
     padding: 20px 0;
 }
+
 .logo-header{
     display: inline;
 }
+
 .caixa-apresentacao{
     position: relative;
     width: 940px; 
@@ -17,12 +22,12 @@ header{
     color:white;
     font-size: 40px;
     text-decoration: none;
-    font-family: Montserrat;
     font-weight: bold;
 }
+
 .caixa-opcoes{
     height: 70px;
-    margin: 0 auto; 
+    margin: 30px auto; 
     background-color: #f58220;
 }
 .caixa-acoes-de-busca{
@@ -36,17 +41,16 @@ header{
 }
 .caixa-opcoes li{
     display: inline;
-    margin-right: 15px;
-    padding: 10px;
+    padding: 15px;
 }
 .caixa-opcoes button{
-    font-family: Montserrat;
     font-weight: bold;
     font-size: 28px;
+    font-family: Montserrat;
+
     background: none;
     color: white;
-    margin-right: 15px;
-    margin-top: 15px;
+    padding: 15px;
     border: none;
 }
 .caixa-opcoes li:hover{
@@ -56,49 +60,60 @@ header{
     transition-duration: 0.3s;
     
 }
+.caixa-opcoes li:active{
+    border-bottom: 4px solid cornsilk;
+}
+
 body {
     background-color: #ffbd59;
-    font-family: Montserrat;
-    font-size: 28px;
-    color: #ee9d25;
-}
-
-body h2{
-    padding-bottom: 15px;
-    font-weight: bold;
-
-}
-
-body table{
-    font-size: 20px;
 }
 
 main{
     width: 80%;
     margin: 0 auto;
-    padding: 30px 20px;
 }
 
 article{
-    background-color:cornsilk;
-    padding: 20px;
-    margin-bottom: 20px;
+    background-color:rgb(250, 243, 215);
+
     border-radius: 5px;
     border: 2px solid #f58220;
-    height: 600px;
+
+    height: auto;
+    min-height: 300px;
+    max-height: 750px;
+    max-width: 1550px;
+    margin: 60px auto;
+
+    overflow: auto;
 }
 
+#titulo-busca{
+    border-bottom: 2px solid #ee9d25;
+    margin: 15px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    font-weight: bold;
+
+    font-size: 30px;
+    color: #f58220;
+}
+
+.dados-busca{
+    padding: 0 25px;
+}
 
 footer{ 
-    padding: 10px 0px;
+    padding: 13px 0px;
     background: #f58220;
     position: absolute;
     width: 100%;
+    margin: 30px auto; 
+
 }
 
 footer p{
     text-align: center;
-    font-family: Montserrat;
     font-size: 14px;
     color: white;
 }
