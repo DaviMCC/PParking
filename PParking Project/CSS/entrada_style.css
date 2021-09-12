@@ -23,20 +23,117 @@ header{
 body {
     background-color: #ffbd59;
     padding-bottom: 58px;
+    font-family: Montserrat;
 }
 main{
-    width: 90vw;
+    width: 80%;
     margin: 0 auto;
-    padding: 30px 20px;
+    
 }
-footer{
+
+article{
+
+    background-color:rgb(250, 243, 215);
+    border-radius: 5px;
+    border: 4px solid #f58220;
+    height: auto;
+    height: 500px;
+    max-height: 500px;
+    max-width: 1550px;
+    margin: 30px auto;
+
     text-align: center;
     font-family: Montserrat;
     font-size: 12px;
-    color: white;
-    padding: 10px;
-    background-color: #f58220;
-    bottom: 0;
-    position: fixed;
+    color: #f58220;
+
+}
+
+#titulo-instrucao{
+
+    margin: 15px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    font-weight: bold;
+
+    font-size: 30px;
+    border-bottom: 3px solid #ee9d25;
+    
+}
+
+#mensagem{
+    
+    font-size: 30px;
+    margin: 45px auto;
+    padding: 15px;
+}
+
+footer{ 
+    padding: 13px 0px;
+    background: #f58220;
+    position: absolute;
     width: 100%;
+    margin: 30px auto; 
+
+}
+
+footer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
+.divinstrucao >h1{
+    background-color: white;
+
+    border-radius: 5px;
+    border: 2px solid #f58220;
+    
+    color: orange;
+    font-family: Montserrat;
+    font-size: 30px
+}
+
+#caixa-de-insercao-placa{
+    
+    height: auto;
+    width: 260px;
+    text-align: center;
+    font-family: Montserrat;
+  
+    font-size: 18px;
+    border-radius: 5px;
+    border: 4px solid #f58220;
+    padding: 40px;
+    margin:  auto;
+    display: block;
+}
+
+#caixa-de-insercao-placa:focus{
+    
+    outline: none !important;
+
+    border: 4px solid #ffbd59;
+
+}
+#botao {
+
+    padding: 30px;
+    margin: 30px auto;
+    display: block;
+
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Montserrat;
+
+    background: #f58220;
+    color: white;
+    border: 1px solid #f58220;
+    border-radius: 5px;
+}
+
+#botao:focus{
+
+    background-color: #ffbd59;
+    border: 4px solid #ffbd59;
 }
