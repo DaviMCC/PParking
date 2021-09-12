@@ -29,14 +29,55 @@ main{
     margin: 0 auto;
     padding: 30px 20px;
 }
-footer{
+.campo-mensagem-verificacao{
+    background-color:rgb(250, 243, 215);
+
+    border-radius: 5px;
+    border: 2px solid #f58220;
+
+    height: auto;
+    max-width: 1550px;
+    margin: 60px auto;
+}
+.campo-digitacao{
+    border-radius: 5px;
+    border: 2px solid #f58220;
+
+    height: 50px;
+    max-width: 1550px;
+    margin: 60px auto;
+}
+.titulo{
     text-align: center;
+    font-size: 30px;
     font-family: Montserrat;
-    font-size: 12px;
-    color: white;
-    padding: 10px;
-    background-color: #f58220;
-    bottom: 0;
-    position: fixed;
+    color: #f58220;
+    padding: 1%;
+    font-weight: bold;
+}
+.instrucao{
+    text-align: center;
+    font-size: 20px;
+    font-family: Montserrat;
+    color: #f58220;
+    padding: 15px;
+    font-weight: bold;
+}
+.verificar {
+    font-family: Montserrat;
+
+}
+footer{ 
+    padding: 13px 0px;
+    background: #f58220;
+    position: absolute;
     width: 100%;
+    margin: 30px auto; 
+
+}
+
+footer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
 }
