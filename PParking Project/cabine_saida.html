@@ -20,12 +20,16 @@
          
         <main>
             <section>
-                <div class="campo-mensagem-verificacao">
-                    <h1 class="titulo">Agradecemos pela estadia!</h1>
-                    <p class="instrucao">Insira o número do ticket para verificar a validação do ticket:</p>
-                    <input type="num" id="numeroid" class="campo-digitacao" placeholder="digite o número do ticket" required="required" name="numero" /><br>
-                    <input type="submit" class="verificar" onclick="Verificar()" value="Verificar" />
+                <div class="div-instrucao">
+                    <h1 class="titulo">Agradecemos pela visita!</h1>
+                    <p class="instrucao">Insira o número do ticket para validar a sua saída</p>
                 </div>
+                    <div class="insercao-botao">
+                        <form>
+                            <input type="num" id="campo-insercao" placeholder="digite o número do ticket" required="required" name="numero" /><br>
+                            <input type="submit" id="botao" onclick="Verificar()" value="Verificar" />
+                        </form>
+                    </div>
             </section>
         </main>
         <footer>
