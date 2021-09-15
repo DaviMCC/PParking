@@ -20,16 +20,6 @@ header{
     font-family: Montserrat;
     font-weight: bold;
 }
-body {
-    background-color: #ffbd59;
-    padding-bottom: 58px;
-    font-family: Montserrat;
-}
-main{
-    width: 80%;
-    margin: 0 auto;
-    
-}
 
 article{
 
@@ -49,7 +39,7 @@ article{
 
 }
 
-#titulo-instrucao{
+#mensagem-bemvindo{
 
     margin: 15px;
     padding-left: 10px;
@@ -61,27 +51,13 @@ article{
     
 }
 
-#mensagem{
+#instrucao-placa{
     
     font-size: 30px;
     margin: 45px auto;
     padding: 15px;
 }
 
-footer{ 
-    padding: 13px 0px;
-    background: #f58220;
-    position: absolute;
-    width: 100%;
-    margin: 30px auto; 
-
-}
-
-footer p{
-    text-align: center;
-    font-size: 14px;
-    color: white;
-}
 #caixa-de-insercao-placa{
     
     height: auto;
@@ -104,7 +80,8 @@ footer p{
     border: 4px solid #ffbd59;
 
 }
-#botao {
+
+#botao-ticket {
 
     padding: 30px;
     margin: 30px auto;
@@ -120,8 +97,36 @@ footer p{
     border-radius: 5px;
 }
 
-#botao:focus{
+#botao-ticket:focus{
 
     background-color: #ffbd59;
     border: 4px solid #ffbd59;
+}
+
+
+body {
+    background-color: #ffbd59;
+    padding-bottom: 58px;
+    font-family: Montserrat;
+}
+
+main{
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+footer{ 
+    padding: 13px 0px;
+    background: #f58220;
+    position: absolute;
+    width: 100%;
+    margin: 30px auto; 
+
+}
+
+footer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
 }
