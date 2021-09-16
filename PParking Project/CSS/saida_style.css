@@ -12,8 +12,8 @@ header{
 }
 .titulo-site{
     position: absolute;
-    right: 10px;
     top: 150px;
+    right: 15px;
     color:white;
     font-size: 40px;
     text-decoration: none;
@@ -27,6 +27,7 @@ body {
 }
 main{
     width: 80%;
+    max-width: 1250px;
     margin: 0 auto;
 }
 section{
@@ -53,61 +54,75 @@ section{
     font-weight: bold;
 
     font-size: 34px;
-    border-bottom: 3px solid #ee9d25;
+    border-bottom: 3px solid #f58220;
 }
 .instrucao{
-    font-size: 30px;
+    font-size: 35px;
     margin: 45px auto;
     padding: 15px;
 }
+
+.insercao-botao {
+    padding-top: 25px;
+}
+
 #campo-insercao{
       
-    height: auto;
+    height: 40px;
     width: 260px;
-
     text-align: center;
     font-family: Montserrat;
-    font-size: 18px;
+    font-size: 40px;
+    font-weight: bold;
     
     border-radius: 5px;
     border: 4px solid #f58220;
     padding: 40px;
-    margin:  auto;
+    margin: 0px auto;
     display: block;
 
 }
+
+#campo-insercao::placeholder{
+    font-size: 18px;
+}
+
 #campo-insercao:focus{
         
     outline: none !important;
-
     border: 4px solid #ffbd59;
 }
 #botao {
+
     padding: 30px;
-    margin: 30px auto;
+    margin: 0px auto;
+    margin-top: 30px;
     display: block;
+    width: 220px;
 
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Montserrat;
 
     background: #f58220;
     color: white;
-    border: 1px solid #f58220;
+    border: 2px solid #f58220;
     border-radius: 5px;
 }
+
 #botao:focus{
 
     background-color: #ffbd59;
-    border: 4px solid #ffbd59;
+    transition-duration: 0.3s;
+
 }
+
 footer{ 
     padding: 13px 0px;
     background: #f58220;
     position: absolute;
     width: 100%;
     margin: 30px auto; 
-    bottom: 0;
 }
 
 footer p{

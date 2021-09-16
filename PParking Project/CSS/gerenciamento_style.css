@@ -78,8 +78,6 @@ article{
 
     border-radius: 5px;
     border: 4px solid #f58220;
-
-    height: auto;
     height: 750px;
     max-height: 750px;
     max-width: 1550px;
@@ -89,7 +87,7 @@ article{
 }
 
 #titulo-busca{
-    border-bottom: 3px solid #ee9d25;
+    border-bottom: px solid #ee9d25;
     margin: 15px;
     padding-left: 10px;
     padding-bottom: 15px;
