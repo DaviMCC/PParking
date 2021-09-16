@@ -1,5 +1,5 @@
 header{
-    background-color: #ffbd59;
+    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
     padding: 20px 0;
 }
 .logo-header{
@@ -7,21 +7,23 @@ header{
 }
 .caixa-apresentacao{
     position: relative;
-    width: 940px; 
+    width: 1050px; 
     margin: 0 auto; 
 }
 .titulo-site{
     position: absolute;
     right: 10px;
-    top: 150px;
+    top: 180px;
     color:white;
-    font-size: 40px;
+    font-size: 50px;
     text-decoration: none;
     font-family: Montserrat;
     font-weight: bold;
+    text-shadow: 1.5px 1.5px 1.5px #f58220;
+
 }
 body {
-    background-color: #ffbd59;
+    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
 }
 
 main{
@@ -32,7 +34,7 @@ main{
 
 footer{ 
     padding: 10px 0px;
-    background: #f58220;
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
     position: absolute;
     width: 100%;
 }
