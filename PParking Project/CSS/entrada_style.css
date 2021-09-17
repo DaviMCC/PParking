@@ -17,7 +17,7 @@ header{
     right: 10px;
     top: 180px;
     color:white;
-    font-size: 46px;
+    font-size: 50px;
     text-decoration: none;
     font-family: Montserrat;
     font-weight: bold;
@@ -30,7 +30,7 @@ section{
     
     background:url(https://www.transparenttextures.com/patterns/gplay.png) repeat rgb(250, 243, 215);
     border-radius: 5px;
-    border: 4px solid #f58220;
+    border: 4px outset #f58220;
     height: 650px;
     max-width: 1550px;
     margin: 60px auto;
@@ -52,7 +52,7 @@ section{
     padding-bottom: 25px;
 
     font-size: 34px;
-    border-bottom: 3px solid #f58220;
+    border-bottom: 3px groove #f58220;
     text-shadow: 2px 2px 2px cornsilk;
 
     
@@ -81,7 +81,7 @@ section{
     text-transform: uppercase;
     
     border-radius: 5px;
-    border: 4px solid #f58220;
+    border: 3px groove #f58220;
     padding: 40px;
     margin: 0px auto;
     display: block;
@@ -96,7 +96,9 @@ section{
 #caixa-de-insercao-placa:focus{
     
     outline: none !important;
-    border: 4px solid #ffbd59;
+    border: 3px groove  #ffbd59;
+    transition-duration: 0.3s;
+
 
 }
 
@@ -113,7 +115,7 @@ section{
     font-family: Montserrat;
 
     color: white;
-    border: 2px solid #f58220;
+    border: 2px outset #f58220;
     border-radius: 5px;
     background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #f58220;
 

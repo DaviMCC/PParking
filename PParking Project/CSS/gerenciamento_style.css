@@ -79,7 +79,7 @@ article{
     background:url(https://www.transparenttextures.com/patterns/gplay.png) repeat rgb(250, 243, 215);
 
     border-radius: 5px;
-    border: 4px solid #f58220;
+    border: 4px outset #f58220;
     height: 750px;
     max-height: 750px;
     max-width: 1550px;

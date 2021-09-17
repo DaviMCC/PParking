@@ -34,7 +34,7 @@ main{
 section{
         background:url(https://www.transparenttextures.com/patterns/gplay.png) repeat rgb(250, 243, 215);
         border-radius: 5px;
-        border: 4px solid #f58220;
+        border: 4px outset #f58220;
     
         height: auto;
         height: 650px;
@@ -47,14 +47,15 @@ section{
         color: #f58220;
 }
 .titulo{
-    margin: 20px;
+    margin: 15px;
     padding-left: 10px;
+    padding-bottom: 15px;
+    font-weight: bold;
     padding-top: 10px;
     padding-bottom: 25px;
-    font-weight: bold;
+
     font-size: 34px;
-    border-bottom: 3px solid #f58220;
-    border-radius: 2px;
+    border-bottom: 3px groove #f58220;
     text-shadow: 2px 2px 2px cornsilk;
 
 }
@@ -80,7 +81,7 @@ section{
     font-weight: bold;
     
     border-radius: 5px;
-    border: 4px solid #f58220;
+    border: 3px groove #f58220;
     padding: 40px;
     margin: 0px auto;
     display: block;
@@ -94,7 +95,8 @@ section{
 #campo-insercao:focus{
         
     outline: none !important;
-    border: 4px solid #ffbd59;
+    border: 3px groove  #ffbd59;
+    transition-duration: 0.3s;
 }
 #botao {
 
@@ -110,7 +112,7 @@ section{
 
     background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #f58220;
     color: white;
-    border: 2px solid #f58220;
+    border: 3px groove #f58220;
     border-radius: 5px;
 }
 
@@ -118,6 +120,7 @@ section{
 
     background-color: #ffbd59;
     transition-duration: 0.3s;
+    border: 3px groove  #ffbd59;
 
 }
 
