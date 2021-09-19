@@ -154,7 +154,7 @@ main{
 .ticket{
     border-radius: 3px;
     padding: 0px 20px 20px 20px;
-    border-top: 3px solid  #ffbd59;
+    border-top: 4px solid  #ffbd59;
     border-bottom: 3px solid  #ffbd59;
     background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat cornsilk;
     box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(156, 156, 156);
