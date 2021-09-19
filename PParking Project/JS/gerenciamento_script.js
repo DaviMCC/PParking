@@ -44,3 +44,4 @@ function getFaturamento()
     document.getElementById("titulo-busca").innerHTML = "Registro de faturamento";
 
 }
+

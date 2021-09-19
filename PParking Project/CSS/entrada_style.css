@@ -102,7 +102,7 @@ section{
 
 }
 
-#botao-ticket {
+#buttonCheckout {
 
     padding: 30px;
     margin: 0px auto;
@@ -121,7 +121,7 @@ section{
 
 }
 
-#botao-ticket:focus{
+#buttonCheckout:focus{
 
     background-color: #ffbd59;
     transition-duration: 0.3s;
