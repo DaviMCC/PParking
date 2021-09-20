@@ -1,3 +1,11 @@
+body {
+    
+    padding-bottom: 58px;
+    font-family: Montserrat;
+    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
+   
+}
+
 header{
     padding: 20px 0;
     background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
@@ -6,6 +14,30 @@ header{
 .logo-header{
     display: inline;
 }
+
+main{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1250px;
+
+}
+
+footer{ 
+    padding: 13px 0px;
+    background: #f58220;
+    position: absolute;
+    width: 100%;
+    margin: 30px auto; 
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
+
+}
+
+footer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
 .caixa-apresentacao{
     position: relative;
     width: 940px; 
@@ -42,7 +74,7 @@ section{
 
 }
 
-#mensagem-bemvindo{
+#mensagem-inicial{
 
     margin: 15px;
     padding-left: 10px;
@@ -58,7 +90,7 @@ section{
     
 }
 
-#instrucao-placa{
+#mensagem-instrucao{
     text-shadow: 2px 2px 2px cornsilk;
     font-size: 35px;
     margin: 45px auto;
@@ -66,11 +98,11 @@ section{
     padding: 15px;
 }
 
-.divplaca {
+.div-insercao-dados {
     padding-top: 25px;
 }
 
-#caixa-de-insercao-placa{
+#campo-insercao-dados{
     
     height: 40px;
     width: 260px;
@@ -87,13 +119,13 @@ section{
     display: block;
 }
 
-#caixa-de-insercao-placa::placeholder{
+#campo-insercao-dados::placeholder{
     font-size: 18px;
     text-transform: none;
 
 }
 
-#caixa-de-insercao-placa:focus{
+#campo-insercao-dados:focus{
     
     outline: none !important;
     border: 3px groove  #ffbd59;
@@ -102,7 +134,7 @@ section{
 
 }
 
-#botao-ticket {
+#botao-submit {
 
     padding: 30px;
     margin: 0px auto;
@@ -121,41 +153,9 @@ section{
 
 }
 
-#botao-ticket:focus{
+#botao-submit:focus{
 
     background-color: #ffbd59;
     transition-duration: 0.3s;
 
-}
-
-
-body {
-    
-    padding-bottom: 58px;
-    font-family: Montserrat;
-    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
-   
-}
-
-main{
-    width: 80%;
-    margin: 0 auto;
-    max-width: 1250px;
-
-}
-
-footer{ 
-    padding: 13px 0px;
-    background: #f58220;
-    position: absolute;
-    width: 100%;
-    margin: 30px auto; 
-    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
-
-}
-
-footer p{
-    text-align: center;
-    font-size: 14px;
-    color: white;
 }

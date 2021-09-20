@@ -21,13 +21,13 @@
         <main>
             <section>
                 <div class="div-instrucao">
-                    <h1 class="titulo">Agradecemos pela visita!</h1>
-                    <p class="instrucao">Insira o número do ticket para validar a sua saída</p>
+                    <h1 id="mensagem-inicial">Agradecemos pela visita!</h1>
+                    <p id="mensagem-instrucao">Insira o número do ticket para validar a sua saída</p>
                 </div>
-                    <div class="insercao-botao">
+                    <div class="div-insercao-dados">
                         <form>
-                            <input type="num" id="campo-insercao" placeholder="Digite o número do ticket" required="required" name="numero" /><br>
-                            <input type="submit" id="botao" onclick="Verificar()" value="Verificar" />
+                            <input type="num" id="campo-insercao-dados" placeholder="Digite o número do ticket" required="required" name="numero" /><br>
+                            <input type="submit" id="botao-submit" onclick="Verificar()" value="Verificar" />
                         </form>
                     </div>
             </section>

@@ -46,7 +46,7 @@ section{
         font-size: 12px;
         color: #f58220;
 }
-.titulo{
+#mensagem-inicial{
     margin: 15px;
     padding-left: 10px;
     padding-bottom: 15px;
@@ -59,7 +59,7 @@ section{
     text-shadow: 2px 2px 2px cornsilk;
 
 }
-.instrucao{
+#mensagem-instrucao{
     text-shadow: 2px 2px 2px cornsilk;
     font-size: 35px;
     margin: 45px auto;
@@ -67,11 +67,11 @@ section{
     padding: 15px;
 }
 
-.insercao-botao {
+.div-insercao-dados {
     padding-top: 25px;
 }
 
-#campo-insercao{
+#campo-insercao-dados{
       
     height: 40px;
     width: 260px;
@@ -88,17 +88,17 @@ section{
 
 }
 
-#campo-insercao::placeholder{
+#campo-insercao-dados::placeholder{
     font-size: 18px;
 }
 
-#campo-insercao:focus{
+#campo-insercao-dados:focus{
         
     outline: none !important;
     border: 3px groove  #ffbd59;
     transition-duration: 0.3s;
 }
-#botao {
+#botao-submit {
 
     padding: 30px;
     margin: 0px auto;
@@ -116,7 +116,7 @@ section{
     border-radius: 5px;
 }
 
-#botao:focus{
+#botao-submit:focus{
 
     background-color: #ffbd59;
     transition-duration: 0.3s;
