@@ -11,9 +11,9 @@ header{
     margin: 0 auto; 
 }
 .titulo-site{
-    position: absolute;
-    right: 10px;
+   position: absolute;
     top: 180px;
+    right: 15px;
     color:white;
     font-size: 50px;
     text-decoration: none;
@@ -24,19 +24,168 @@ header{
 }
 body {
     background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
+    padding-bottom: 58px;
+
 }
 
 main{
     width: 80%;
-    margin: 0 auto;
-    padding: 30px 20px;
+    max-width: 1250px;
+    margin: 0px auto;
 }
 
+
+
+.caixa1 {
+    background:url(https://www.transparenttextures.com/patterns/gplay.png) repeat rgb(250, 243, 215);
+    border-radius: 5px;
+    border: 4px outset #f58220;
+    height: 750px;
+    max-width: 1550px;
+    margin: 60px auto;
+
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 12px;
+    color: #f58220;
+
+}
+
+.titulo{
+    margin: 15px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 25px;
+
+    font-size: 34px;
+    border-bottom: 3px groove #f58220;
+    text-shadow: 2px 2px 2px cornsilk;
+
+}
+
+.instrucao{
+    text-shadow: 2px 2px 2px cornsilk;
+    font-size: 35px;
+    margin: 20px auto;
+    font-weight: bold;
+    padding: 15px 15px;
+}
+
+#campo-insercao{
+      
+    height: 40px;
+    width: 260px;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+    
+    border-radius: 5px;
+    border: 3px groove #f58220;
+    padding: 40px;
+    margin: 0px auto;
+    display: block;
+
+}
+
+#campo-insercao::placeholder{
+    font-size: 18px;
+}
+
+#campo-insercao:focus{
+        
+    outline: none !important;
+    border: 3px groove  #ffbd59;
+    transition-duration: 0.3s;
+}
+#botaoCheckout, #botaoProsseguir, #botaoDinheiro, #botaoCartao{
+
+    padding: 30px;
+    margin: 0px auto;
+    margin-top: 30px;
+    display: block;
+    width: 220px;
+
+    font-weight: bold;
+    font-size: 25px;
+    font-family: Montserrat;
+
+    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #f58220;
+    color: white;
+    border: 3px groove #f58220;
+    border-radius: 5px;
+}
+
+#botaoCheckout:focus, #botaoProsseguir:focus, #botaoDinheiro:focus, #botaoCartao:focus{
+
+    background-color: #ffbd59;
+    transition-duration: 0.3s;
+    border: 3px groove  #ffbd59;
+
+}
+
+.p1 form{
+    margin-top: 110px;
+}
+
+.p2{
+    display: none;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    text-shadow: 3px 3px 3px cornsilk;
+
+}
+
+.p2 h2{
+    padding-top: 15px;
+    color: #f58220;
+    font-weight: bold;
+}
+
+.p2 p{
+    padding-top: 5px;
+    border-bottom: #ffbd59 solid 2px;
+    padding-bottom: 5px;
+}
+
+.ticket{
+    border-radius: 3px;
+    padding: 0px 20px 20px 20px;
+    border-top: 4px solid  #ffbd59;
+    border-bottom: 3px solid  #ffbd59;
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat cornsilk;
+    box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(156, 156, 156);
+
+}
+
+
+#numeroTicket {
+    border-bottom: #ffbd59 solid 2px;
+    padding-bottom: 5px;
+
+}
+
+.p3{
+    display: none;
+}
+
+.p3 #botaoDinheiro, #botaoCartao{
+    display: inline-block;
+    margin: 70px;
+}
+
+
 footer{ 
-    padding: 10px 0px;
-    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
+    padding: 13px 0px;
+    background: #f58220;
     position: absolute;
     width: 100%;
+    margin: 30px auto; 
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
+
 }
 
 footer p{
