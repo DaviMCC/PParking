@@ -89,6 +89,8 @@ section{
     
 }
 
+
+
 #mensagem-instrucao{
     text-shadow: 2px 2px 2px cornsilk;
     font-size: 35px;
@@ -156,4 +158,19 @@ section{
     background-color: #ffbd59;
     transition-duration: 0.3s;
 
+}
+
+.p1{
+    display: none;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    text-shadow: 3px 3px 3px cornsilk;
+
+}
+
+.p1 h1{
+    padding-top: 15px;
+    color: #f58220;
+    font-weight: bold;
 }

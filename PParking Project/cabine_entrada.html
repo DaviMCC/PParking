@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="CSS/reset.css">
         <link rel="stylesheet" href="CSS/entrada_style.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
-
+        <script type="text/javascript" src="JS/entrada.js"></script>
     </head>
     <body>
         
@@ -29,12 +29,24 @@
                 </div>
                 
                 <div class="div-insercao-dados">
-                    <form>
+                    <form onsubmit="gerar_ticket(); return false">
                         <input type="text" id="campo-insercao-dados" placeholder="Digite a placa de seu veículo" required="required" name=placa  maxlength="7"/> 
                         <input type="submit" id="botao-submit" value="Gerar ticket" />
                     </form> 
                 </div> 
                 
+                <div class="p1">
+                    <h1>O seu ticket é:</h1>    
+                    <p id="mensagem-ticket">XXXXX</p>  
+                    <h1>Placa do veículo:</h1>
+                    <p id="placa-veiculo">XXXXXX</p>
+                    <h1>Data de entrada:</h1>
+                    <p id="data-entrada">XX/XX/XX</p>
+                    <h1>Horário de entrada:</h1>
+                    <p id="horario-entrada">XX:XX</p>
+                            
+                </div>
+                <!--Inserir a estrutura do ticket aqui -->
             </section>
         </main>
 
