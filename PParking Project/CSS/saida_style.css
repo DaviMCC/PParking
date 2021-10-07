@@ -66,8 +66,11 @@ section{
     font-weight: bold;
     padding: 15px;
 }
+.digitacao-e-verificacao form {
+    display: block;
+}
 
-.div-insercao-dados {
+#div-insercao-dados {
     padding-top: 25px;
 }
 
@@ -123,7 +126,6 @@ section{
     border: 3px groove  #ffbd59;
 
 }
-
 footer{ 
     padding: 13px 0px;
     background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
