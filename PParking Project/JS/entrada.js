@@ -1,10 +1,11 @@
 function gerar_ticket()
 {
     const InsercaoDeDados = document.querySelector(".div-insercao-dados")
-    InsercaoDeDados.style.display= "none"
-    
-    const InstrucaoPlaca = document.querySelector("#mensagem-instrucao")
-    InstrucaoPlaca.style.display = "none"
+    InsercaoDeDados.style.display= "none"   
+
+    const MensagemInicial = document.getElementById("mensagem-inicial").innerHTML = "Aproveite a estadia!";
+
+    const MensagemInstrucao = document.getElementById("mensagem-instrucao").innerHTML = "Retire o seu ticket";
 
     const Informacoes = document.querySelector(".p1")
     Informacoes.style.display = "inline-block";
