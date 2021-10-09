@@ -27,3 +27,17 @@ function prosseguir()
     const caixa1 = document.querySelector(".caixa1");
     caixa1.style.height = "750px";
 }
+
+function pagar()
+{
+    const p3 = document.querySelector('.p3');
+    p3.style.display = "none";
+
+    document.getElementsByClassName("titulo")[0].innerHTML = "Somos gratos pelo seu pagamento!";
+
+    document.getElementsByClassName("instrucao")[0].innerHTML = "Seu pagamento foi processado com sucesso e seu ticket está validado.";
+
+    const p2 = document.querySelector('.p4');
+    p2.style.display = "inline-block";
+
+}

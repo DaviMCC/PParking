@@ -151,6 +151,28 @@ main{
     padding-bottom: 5px;
 }
 
+.p4{
+    display: none;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    text-shadow: 3px 3px 3px cornsilk;
+    padding-top: 70px;
+
+}
+
+.p4 h2{
+    padding-top: 15px;
+    color: #f58220;
+    font-weight: bold;
+}
+
+.p4 p{
+    padding-top: 5px;
+    border-bottom: #ffbd59 solid 2px;
+    padding-bottom: 5px;
+}
+
 .ticket{
     border-radius: 3px;
     padding: 0px 20px 20px 20px;
