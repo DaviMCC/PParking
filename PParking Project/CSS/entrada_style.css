@@ -22,22 +22,6 @@ main{
 
 }
 
-footer{ 
-    padding: 13px 0px;
-    background: #f58220;
-    position: absolute;
-    width: 100%;
-    margin: 30px auto; 
-    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
-
-}
-
-footer p{
-    text-align: center;
-    font-size: 14px;
-    color: white;
-}
-
 .caixa-apresentacao{
     position: relative;
     width: 940px; 
@@ -88,6 +72,8 @@ section{
 
     
 }
+
+
 
 #mensagem-instrucao{
     text-shadow: 2px 2px 2px cornsilk;
@@ -157,3 +143,45 @@ section{
     transition-duration: 0.3s;
 
 }
+
+.p1{
+    display: none;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    text-shadow: 3px 3px 3px cornsilk;
+
+}
+
+.p1{
+    border-radius: 3px;
+    padding: 0px 20px 20px 20px;
+    border-top: 4px solid  #ffbd59;
+    border-bottom: 3px solid  #ffbd59;
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat cornsilk;
+    box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(156, 156, 156);
+
+}
+
+.p1 h1{
+    padding-top: 15px;
+    color: #f58220;
+    font-weight: bold;
+}
+
+footer{ 
+    padding: 13px 0px;
+    background: #f58220;
+    position: absolute;
+    width: 100%;
+    margin: 30px auto; 
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
+
+}
+
+footer p{
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
