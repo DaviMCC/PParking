@@ -71,6 +71,7 @@ main{
     margin: 20px auto;
     font-weight: bold;
     padding: 15px 15px;
+    padding-top: 25px;
 }
 
 #campo-insercao{
