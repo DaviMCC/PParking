@@ -1,30 +1,35 @@
 function verificar_ticket()
 {
-    let estaPago = false;
-    
-    const p1 = document.querySelector('.digitacao-e-verificacao');
-
-    const mensagemInicial = document.getElementById("mensagem-inicial")
-
-    const mensagemInstrucao = document.getElementById("mensagem-instrucao")
+    let estaPago = true;
 
     if (estaPago==true)
     {   
-        document.getElementById("mensagem-inicial").innerHTML = "Seu ticket foi validado!";
-
-        document.getElementById("mensagem-instrucao").innerHTML = "Agradeçemos pela estadia!";
-
-        p1.style.display = "none";
-
+        exibirMensagem("Agradeçemos pela estadia!", "Seu ticket foi validado!");
     } 
     else 
     { 
-        document.getElementById("mensagem-inicial").innerHTML = "Infelizmente seu ticket não foi validado...";
-
-        document.getElementById("mensagem-instrucao").innerHTML = "Retorne à cabine de pagamento para efetuar o pagamento";
-
-        p1.style.display = "none";
+        exibirMensagem("Retorne à cabine de pagamento para efetuar o pagamento", "Infelizmente seu ticket não foi validado...");
     }
-
+    retornarHome();
     return false;
+}
+function exibirMensagem(mensagem, tituloMensagem){
+
+        const p1 = document.querySelector('.digitacao-e-verificacao');
+        p1.style.display = "none";
+  
+    document.getElementById("mensagem-inicial").innerHTML = tituloMensagem;
+
+    document.getElementById("mensagem-instrucao").innerHTML = mensagem;
+
+    const instrucao = document.querySelector('#mensagem-instrucao');
+    instrucao.style.paddingTop = '160px';
+    instrucao.style.fontSize = '45px';
+
+    retornarHome();
+}
+function retornarHome(){
+
+    setTimeout((() => {window.location.replace("cabine_saida.html")}), 10000);
+
 }
