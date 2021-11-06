@@ -4,6 +4,7 @@ body {
 header{
     background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #ffbd59;
     padding: 20px 0;
+
 }
 
 .logo-header{
@@ -28,22 +29,25 @@ header{
 }
 
 .caixa-opcoes{
+    width: auto; 
+    min-width: 1140px; 
     height: 70px;
-    margin: 30px auto; 
     background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
+    margin: 0 auto;
+;
+
 }
+
 .caixa-acoes-de-busca{
-    position: relative;
-    width: 940px; 
-    margin: 0 auto; 
+    min-width: 1140px; 
+    width: 50%; 
+    margin: 0 auto;
 }
-.acoes-de-busca{
-    position: absolute;
-    width: 1050px;
-}
+
 .caixa-opcoes li{
     display: inline;
     padding: 15px;
+    
 }
 .caixa-opcoes button{
     font-weight: bold;
@@ -76,6 +80,7 @@ body {
 
 main{
     width: 80%;
+    min-width: 1140px;
     margin: 0 auto;
 }
 
@@ -88,7 +93,6 @@ article{
     max-height: 750px;
     max-width: 1550px;
     margin: 60px auto;
-
     overflow: auto;
 }
 
@@ -125,6 +129,7 @@ footer{
     background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
     position: absolute;
     width: 100%;
+    min-width: 1140px;
     margin: 30px auto; 
 
 }
