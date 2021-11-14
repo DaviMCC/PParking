@@ -1,5 +1,7 @@
 module.exports = {
-dbuser: 'ADMIN',
-dbpassword: 'Pparking456@@',
-connectString: 'pparkingdb_high'
-}
+    user: 'system',
+    password: 'system',
+    connectString: 'localhost/xe',
+    externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false
+  };
+  
