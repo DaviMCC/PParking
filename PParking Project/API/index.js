@@ -27,13 +27,16 @@ function BD ()
 	this.estrutureSe = async function ()
 	{
 		try
-		{
-			const conexao = await this.getConexao();
+		{			
+			const conexao = await this.conexao();
+			const sql2 =  "alter session set nls_date_format = 'DD-MM-YYYY HH24:MI:SS'";
+			await conexao.execute(sq2);
+			
 			const sql     = 'CREATE TABLE TICKETS(' +
-				'CODIGO VARCHAR(8) PRIMARY KEY, PLACA VARCHAR2(7),' +
-				'DATA_ENTRADA DATE, DATA_SAIDA DATE,' +
+				'CODIGO VARCHAR(8) PRIMARY KEY NOT NULL, PLACA VARCHAR2(7) NOT NULL,' +
+				'DATA_ENTRADA DATE NOT NULL, DATA_SAIDA DATE,' +
 				'DATA_PAGAMENTO DATE,' +
-				'STATUS_TICKET VARCHAR(12),' + 
+				'STATUS_TICKET VARCHAR(12) NOT NULL,' + 
 				'VALOR_ESTADIA VARCHAR(12))'
 			await conexao.execute(sql);
             console.log ('Tabelas não existiam e foram criadas com sucesso!');
@@ -116,7 +119,7 @@ function acoesTicket (bd)
 		const conexao = await this.bd.getConexao();
 
 		const sql = "UPDATE TICKETS SET STATUS_TICKET=:0 WHERE CODIGO=:1";
-		const dados = [status,codigo];
+		const dados = [status, codigo];
 		await conexao.execute(sql,dados);
 
 		const sql2 = 'COMMIT';
