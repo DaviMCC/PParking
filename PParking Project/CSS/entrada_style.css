@@ -165,9 +165,11 @@ section{
 
 .p1 h1{
     padding-top: 15px;
+    padding-bottom: 10px;
     color: #f58220;
     font-weight: bold;
 }
+
 
 footer{ 
     padding: 13px 0px;
