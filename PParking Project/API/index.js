@@ -28,14 +28,12 @@ function BD ()
 	{
 		try
 		{			
-			const conexao = await this.conexao();
-			const sql2 =  "alter session set nls_date_format = 'DD-MM-YYYY HH24:MI:SS'";
-			await conexao.execute(sq2);
+			const conexao = await this.getConexao();
 			
-			const sql     = 'CREATE TABLE TICKETS(' +
+			const sql   = 'CREATE TABLE TICKETS(' +
 				'CODIGO VARCHAR(8) PRIMARY KEY NOT NULL, PLACA VARCHAR2(7) NOT NULL,' +
-				'DATA_ENTRADA DATE NOT NULL, DATA_SAIDA DATE,' +
-				'DATA_PAGAMENTO DATE,' +
+				'DATA_ENTRADA VARCHAR(20) NOT NULL, DATA_SAIDA VARCHAR(20),' +
+				'DATA_PAGAMENTO VARCHAR(20),' +
 				'STATUS_TICKET VARCHAR(12) NOT NULL,' + 
 				'VALOR_ESTADIA VARCHAR(12))'
 			await conexao.execute(sql);
@@ -45,6 +43,7 @@ function BD ()
 		catch (erro)
 		{
             console.log ('Tabelas já existem, pulando etapa de criação!');
+			console.log(erro);
         } 
 	}
 }
@@ -56,7 +55,7 @@ function geraCodigoTicket(){
 	var current_date = (new Date()).valueOf().toString();
 	var random = Math.random().toString();
 
-	return (crypto.createHash('sha1').update(current_date + random).digest('hex')).substring(0, 8);
+	return (crypto.createHash('sha1').update(current_date + random).digest('hex')).substring(0, 8).toUpperCase();
 	
 }
 
@@ -69,7 +68,7 @@ function acoesTicket (bd)
 	{
 		const conexao = await this.bd.getConexao();
 		
-		const sql1 = "INSERT INTO TICKETS (CODIGO, PLACA, DATA_ENTRADA, STATUS_TICKET) VALUES (:0, :1, sysdate, :2)"
+		const sql1 = "INSERT INTO TICKETS (CODIGO, PLACA, DATA_ENTRADA, STATUS_TICKET) VALUES (:0, :1, to_char(sysdate,'dd/mm/yyyy HH24:MI'),:2)"
 		const dados = [ticket.codigo.toUpperCase(), ticket.placa, 'BLOQUEADO'];
 
 		console.log(sql1, dados);
@@ -203,9 +202,10 @@ async function inclusaoEntrada (req, res)
     try
     {
         await  global.acoesTicket.incluaEntrada(ticket);
-        const  sucesso = new Comunicado ('IBS','Inclusão bem sucedida',
-		                  'O ticket foi incluído com sucesso');
-        return res.status(201).json(sucesso);
+		let ret = await global.acoesTicket.recuperaUmTicket(codigo);
+		ret = ret[0];
+		ret = new Ticket (ret[0],ret[1],ret[2]);
+        return res.status(201).json(ret);
 	}
 	catch (error)
 	{
@@ -357,6 +357,7 @@ async function ativacaoDoServidor ()
     const bd = new BD ();
 	await bd.estrutureSe();
     global.acoesTicket = new acoesTicket (bd);
+
 
     const express = require('express');
     const app     = express();

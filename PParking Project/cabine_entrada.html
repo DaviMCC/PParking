@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
 
-        <meta charset="UTF-8">
-        <title>Cabine de Entrada - PParking</title>
-        <link rel="icon" type="image/jpg" href="images/icone_pp.png" />
-        <link rel="stylesheet" href="CSS/reset.css">
-        <link rel="stylesheet" href="CSS/entrada_style.css">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
-        <script type="text/javascript" src="JS/entrada.js"></script>
-    </head>
-    <body>
-        
-        <header>
-            <div class="caixa-apresentacao">
-                <h1 class="logo-header"><a href="cabine_entrada.html"><img src ="images/logo.png" alt="PParking logotipo"></a></h1>
-                <h1 class="titulo-site" >Cabine de Entrada</h1>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Cabine de Entrada - PParking</title>
+    <link rel="icon" type="image/jpg" href="images/icone_pp.png" />
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="CSS/entrada_style.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="JS/entrada.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="caixa-apresentacao">
+            <h1 class="logo-header"><a href="cabine_entrada.html"><img src="images/logo.png"
+                        alt="PParking logotipo"></a></h1>
+            <h1 class="titulo-site">Cabine de Entrada</h1>
+        </div>
+    </header>
+
+    <main>
+        <section>
+
+            <div class="div-instrucao">
+                <h1 id="mensagem-inicial">Seja bem-vindo!</h1>
+                <p id="mensagem-instrucao">Insira a placa do seu veículo para gerar o ticket</p>
+
             </div>
-        </header>
-         
-        <main>
-            <section>
 
-                <div class="div-instrucao">
-                    <h1 id="mensagem-inicial">Seja bem-vindo!</h1>
-                    <p id="mensagem-instrucao">Insira a placa do seu veículo para gerar o ticket</p>
-                    
-                </div>
-                
-                <div class="div-insercao-dados">
-                    <form onsubmit="gerar_ticket(); return false">
-                        <input type="text" id="campo-insercao-dados" placeholder="Digite a placa de seu veículo" required="required" name=placa  maxlength="7"/> 
-                        <input type="submit" id="botao-submit" value="Gerar ticket" />
-                    </form> 
-                </div>
-                
-                <div class="p1">
-                    <h1>Número do ticket:</h1>    
-                    <p id="mensagem-ticket">XXXXX</p>  
-                    <h1>Placa do veículo:</h1>
-                    <p id="placa-veiculo">XXXXXX</p>
-                    <h1>Data de entrada:</h1>
-                    <p id="data-entrada">XX/XX/XX</p>
-                    <h1>Horário de entrada:</h1>
-                    <p id="horario-entrada">XX:XX</p>
-                            
-                </div>
-        
-            </section>
-        </main>
+            <div class="div-insercao-dados">
+                <form onsubmit="gerarTicket(); return false;">
+                    <input type="text" id="campo-insercao-dados" placeholder="Digite a placa de seu veículo"
+                        required="required" style="text-transform:uppercase" name=placa maxlength="7" minlength="7" oninput= "mascara(this);"/>
+                    <input type="submit" id="botao-submit" value="Gerar ticket" />
+                </form>
+            </div>
 
-        <footer>
-            <p>Copyright &copy; - 2021 - PParking </p>
-        </footer>
-    </body>
+            <div class="p1">
+                <h1>Número do ticket:</h1>
+                <p id="mensagem-ticket" style="text-transform:uppercase">XXXXX</p>
+                <h1>Placa do veículo:</h1>
+                <p id="placa-veiculo">XXXXXX</p>
+                <h1>Data de entrada:</h1>
+                <p id="data-entrada">XX/XX/XX</p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; - 2021 - PParking </p>
+    </footer>
+</body>
+
 </html>
