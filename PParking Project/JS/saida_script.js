@@ -1,10 +1,10 @@
 function verificar_ticket()
 {
-    let estaPago = true;
+    let estaPago = false;
 
     if (estaPago==true)
     {   
-        exibirMensagem("Agradeçemos pela estadia!", "Seu ticket foi validado!");
+        exibirMensagem("Cancela liberada!", "Seu ticket foi validado!");
     } 
     else 
     { 
