@@ -84,4 +84,5 @@ function calculaDiferencaHorario(horaEntrada){
     var tot = Math.trunc(totalMin / 60).toString() + "." + (totalMin % 60).toString();
 
     return parseFloat(tot);
+    
 }
