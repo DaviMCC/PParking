@@ -209,11 +209,10 @@ async function inclusaoEntrada (req, res)
 	}
 	catch (error)
 	{
-		console.log(error);
-		console.log('TESTE AQUI');
-		const  erro3 = new Comunicado ('LJE','Veículo existente',
-		                  'Já há veículo cadastrado com o código informado');
-        return res.status(409).json(erro3);
+		console.log(erro);
+		const erro1 = new Comunicado ('EI','Erro Interno',
+		                  'Não foi possível salvar as informações');
+        return res.status(500).json(erro1);
     }
 }
 
@@ -307,7 +306,7 @@ async function recuperaTicketPorCodigo (req, res)
 	else
 	{
 		ret = ret[0];
-		ret = new Ticket (ret[0],ret[1],ret[2]);
+		ret = new Ticket (ret[0],ret[1],ret[2], ret[3], ret[4], ret[5], ret[6]);
 		return res.status(200).json(ret);
 	}
 
