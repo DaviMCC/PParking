@@ -1,7 +1,6 @@
-function exibirTicket(ticket, placa, dataEntrada)
-{
+function exibirTicket(ticket, placa, dataEntrada) {
     const insercaoDeDados = document.querySelector(".div-insercao-dados")
-    insercaoDeDados.style.display= "none"   
+    insercaoDeDados.style.display = "none"
 
     const mensagemInicial = document.getElementById("mensagem-inicial").innerHTML = "Aproveite a estadia!";
 
@@ -19,64 +18,63 @@ function exibirTicket(ticket, placa, dataEntrada)
 
 }
 
-function alertarErro(mensagem){    
-            
-        const insercaoDeDados = document.querySelector(".div-insercao-dados")
-        insercaoDeDados.style.display= "none" 
-    
-        document.getElementById("mensagem-inicial").innerHTML = "Ops! Algo deu errado!";
-    
-        document.getElementById("mensagem-instrucao").innerHTML = mensagem;
-    
-        const instrucao = document.querySelector('#mensagem-instrucao');
-        instrucao.style.paddingTop = '160px';
-        instrucao.style.fontSize = '45px';
-    
-        retornarHome();
-    
+function alertarErro(mensagem) {
+
+    const insercaoDeDados = document.querySelector(".div-insercao-dados")
+    insercaoDeDados.style.display = "none"
+
+    document.getElementById("mensagem-inicial").innerHTML = "Ops! Algo deu errado!";
+
+    document.getElementById("mensagem-instrucao").innerHTML = mensagem;
+
+    const instrucao = document.querySelector('#mensagem-instrucao');
+    instrucao.style.paddingTop = '160px';
+    instrucao.style.fontSize = '45px';
+
+    retornarHome();
+
 }
 
-function retornarHome(){
+function retornarHome() {
 
-        setTimeout((() => {window.location.replace("cabine_entrada.html")}), 10000);
-    
+    setTimeout((() => { window.location.replace("cabine_entrada.html") }), 10000);
+
     return false;
 }
 
-function Placa(placa){
+function Placa(placa) {
     this.placa = placa;
 }
 
 function gerarTicket() {
-    let placa = document.getElementById('campo-insercao-dados').value 
-    
-    if (placa !== "") 
-    {
-          let url = `http://localhost:3000/entrada`
-          let body = new Placa(placa);
-  
-          let res = axios.post(url,body)
-          .then(response => {
-              if (response.data) {
-               this.exibirTicket(response.data.codigo, response.data.placa, response.data.dataEntrada)
-              }
-          })
-          .catch(error  =>  {
-              
-              if (error.response) {
+    let placa = document.getElementById('campo-insercao-dados').value
 
-                alertarErro(error.response.data.descricao);
-                  
-              }
-          })
-        }
-  }
+    if (placa !== "") {
+        let url = `http://localhost:3000/entrada`
+        let body = new Placa(placa);
 
-  function mascara(i){
-   
+        let res = axios.post(url, body)
+            .then(response => {
+                if (response.data) {
+                    this.exibirTicket(response.data.codigo, response.data.placa, response.data.dataEntrada)
+                }
+            })
+            .catch(error => {
+
+                if (error.response) {
+
+                    alertarErro(error.response.data.descricao);
+
+                }
+            })
+    }
+}
+
+function mascara(i) {
+
     var v = i.value;
-    
+
     i.setAttribute("maxlength", "7");
-    if (v.length == 3 ) i.value += "-";
- 
- }
+    if (v.length == 3) i.value += "-";
+
+}

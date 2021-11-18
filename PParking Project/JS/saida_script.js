@@ -32,27 +32,32 @@ function verificarTicket() {
         let url = `http://localhost:3000/tickets/codigo/${ticket}`
 
         let res = axios.get(url).then(response => {
-                if (response.data) {
+            if (response.data) {
 
-                    let horaEntrada = response.data.dataEntrada.slice(response.data.dataEntrada.length - 5);
-                    const ticketEncontrado = new Ticket(response.data.status, horaEntrada)
+                let horaEntrada = response.data.dataEntrada.slice(response.data.dataEntrada.length - 5);
+                const ticketEncontrado = new Ticket(response.data.status, horaEntrada)
 
-                    if (ticketEncontrado.status == "DESBLOQUEADO") {
-                        exibirMensagem("Agradeçemos pela estadia!", "Sua saída foi validadade e a cancela está liberada!");
-                    }
-                    else if(ticketEncontrado.status == "BLOQUEADO"){
-                        
-                        var estadia = parseFloat(calculaDiferencaHorario(ticketEncontrado.horaEntrada));
-                        
-                        if(estadia > 0.15){
+                if (ticketEncontrado.status == "DESBLOQUEADO") {
+                    finalizarTicket(ticket);
+                    exibirMensagem("Agradeçemos pela estadia!", "Sua saída foi validada e a cancela está liberada!");
+                }
+                else if (ticketEncontrado.status == "BLOQUEADO") {
+
+                    var estadiaEmSegundos = calculaDiferencaHorario(ticketEncontrado.horaEntrada);
+
+                    if (estadiaEmSegundos > 900) {
                         exibirMensagem("A sua saída não foi validada...", "Sua estádia ultrapassou o periodo gratuito. <p> Retorne ao caixa de auto-atendimento para "
-                        + "efetuar seu pagamento.");
-                        }else if(estadia <= 0.15){
-                            exibirMensagem("Agradeçemos pela sua estadia!", "Periodo gratuito de 15 minutos não ultrapassado. <p>Cancela liberada!</p>");
-                        }
+                            + "efetuar seu pagamento.");
+                    } else if (estadiaEmSegundos <= 900) {
+                        finalizarTicket(ticket);
+                        exibirMensagem("Agradeçemos pela sua estadia!", "Periodo gratuito de 15 minutos não ultrapassado. <p>Cancela liberada!</p>");
                     }
                 }
-            })
+                else if (ticketEncontrado.status == "FINALIZADO") {
+                    exibirMensagem("Ops! Algo deu errado!", "Ticket inválido.");
+                }
+            }
+        })
             .catch(error => {
 
                 if (error.response) {
@@ -66,14 +71,11 @@ function verificarTicket() {
     retornarHome();
 }
 
-function calculaDiferencaHorario(horaEntrada){
+function calculaDiferencaHorario(hhmmEntrada) {
 
-    var data = new Date();
-    var horaAtual = data.getHours().toString();
-    var minutosAtuais = data.getMinutes().toString();
-    var horaEminutos = horaAtual + ":" + minutosAtuais;
+    var hhmmAtual = recuperaHHMMatual();
 
-    var inicial = horaEntrada, final = horaEminutos;
+    var inicial = hhmmEntrada, final = hhmmAtual;
 
     var splInicial = inicial.split(":"), splFinal = final.split(":");
 
@@ -81,8 +83,34 @@ function calculaDiferencaHorario(horaEntrada){
     var finalMin = (Number(splFinal[0] * 60)) + Number(splFinal[1]);
 
     var totalMin = Number(finalMin - inicialMin);
-    var tot = Math.trunc(totalMin / 60).toString() + "." + (totalMin % 60).toString();
+    var tot = Math.trunc(totalMin / 60).toString() + ":" + (totalMin % 60).toString();
 
-    return parseFloat(tot);
-    
+    var totSplit = tot.split(":");
+    var diferencaEmSeg = (Number(totSplit[0] * 3600) + Number(totSplit[1]) * 60);
+
+
+    return diferencaEmSeg;
+
+}
+
+function finalizarTicket(codigo) {
+    let url = `http://localhost:3000/tickets/saida/${codigo}`
+
+    let res = axios.patch(url).then(response => {
+        if (response.data) { }
+    })
+        .catch(error => {
+            if (error.response) {
+                exibirMensagem("Ops! Algo deu errado!", "Houve um erro interno, por favor tentar novamente");
+            }
+        })
+}
+
+function recuperaHHMMatual() {
+    var data = new Date();
+    var horaAtual = data.getHours().toString();
+    var minutosAtuais = data.getMinutes().toString();
+    var horaEminutos = horaAtual + ":" + minutosAtuais;
+
+    return horaEminutos;
 }
