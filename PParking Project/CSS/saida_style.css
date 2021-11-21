@@ -101,6 +101,23 @@ section{
     border: 3px groove  #ffbd59;
     transition-duration: 0.3s;
 }
+
+::-webkit-input-placeholder { 
+    text-transform: none;
+}
+:-moz-placeholder { 
+    text-transform: none;
+}
+::-moz-placeholder {
+    text-transform: none;
+}
+:-ms-input-placeholder { 
+    text-transform: none;
+}
+::placeholder { 
+    text-transform: none;
+}
+
 #botao-submit {
 
     padding: 30px;

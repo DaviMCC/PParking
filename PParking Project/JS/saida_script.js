@@ -24,46 +24,35 @@ function Ticket(status, horaEntrada) {
     this.horaEntrada = horaEntrada;
 }
 
-function verificarTicket() {
+function executarSaida() {
 
-    let ticket = document.getElementById('campo-insercao-dados').value
+    let ticket = document.getElementById('campo-insercao-dados').value.toUpperCase();
 
     if (ticket !== "") {
-        let url = `http://localhost:3000/tickets/codigo/${ticket}`
+        let url = `http://localhost:3000/tickets/saida/${ticket}`
 
         let res = axios.get(url).then(response => {
             if (response.data) {
 
-                let horaEntrada = response.data.dataEntrada.slice(response.data.dataEntrada.length - 5);
-                const ticketEncontrado = new Ticket(response.data.status, horaEntrada)
-
-                if (ticketEncontrado.status == "DESBLOQUEADO") {
-                    finalizarTicket(ticket);
+                if (response.data.codigo == "SVSEG") {
+                    exibirMensagem("Agradeçemos pela sua estadia!", "Periodo gratuito de 15 minutos não ultrapassado. <p>Cancela liberada!</p>");
+                } else if (response.data.codigo == "SVS")
                     exibirMensagem("Agradeçemos pela estadia!", "Sua saída foi validada e a cancela está liberada!");
-                }
-                else if (ticketEncontrado.status == "BLOQUEADO") {
-
-                    var estadiaEmSegundos = calculaDiferencaHorario(ticketEncontrado.horaEntrada);
-
-                    if (estadiaEmSegundos > 900) {
-                        exibirMensagem("A sua saída não foi validada...", "Sua estádia ultrapassou o periodo gratuito. <p> Retorne ao caixa de auto-atendimento para "
-                            + "efetuar seu pagamento.");
-                    } else if (estadiaEmSegundos <= 900) {
-                        finalizarTicket(ticket);
-                        exibirMensagem("Agradeçemos pela sua estadia!", "Periodo gratuito de 15 minutos não ultrapassado. <p>Cancela liberada!</p>");
-                    }
-                }
-                else if (ticketEncontrado.status == "FINALIZADO") {
-                    exibirMensagem("Ops! Algo deu errado!", "Ticket inválido.");
-                }
             }
         })
             .catch(error => {
 
-                if (error.response) {
+                if (error.response.data.codigo == "TNE") {
 
-                    exibirMensagem("Ops! Algo deu errado!", error.response.data.descricao);
+                    exibirMensagem("Ops! Algo deu errado!", "Por favor, insira um ticket válido.");
                     console.log(error);
+
+                } else if (error.response.data.codigo == "EI") {
+                    exibirMensagem("Ops! Algo deu errado!", "Erro interno, tente novamente.");
+                } else if (error.response.data.codigo == "TJF") {
+                    exibirMensagem("Ops! Algo deu errado!", "Por favor, insira um ticket que ainda não foi finalizado.");
+                } else if (error.response.data.codigo == "SNV") {
+                    exibirMensagem("Ops! Algo deu errado!", "Por favor, retorne ao caixa de pagamento para efetuar o pagamento do seu ticket.");
 
                 }
             })
@@ -71,46 +60,6 @@ function verificarTicket() {
     retornarHome();
 }
 
-function calculaDiferencaHorario(hhmmEntrada) {
-
-    var hhmmAtual = recuperaHHMMatual();
-
-    var inicial = hhmmEntrada, final = hhmmAtual;
-
-    var splInicial = inicial.split(":"), splFinal = final.split(":");
-
-    var inicialMin = (Number(splInicial[0] * 60)) + Number(splInicial[1]);
-    var finalMin = (Number(splFinal[0] * 60)) + Number(splFinal[1]);
-
-    var totalMin = Number(finalMin - inicialMin);
-    var tot = Math.trunc(totalMin / 60).toString() + ":" + (totalMin % 60).toString();
-
-    var totSplit = tot.split(":");
-    var diferencaEmSeg = (Number(totSplit[0] * 3600) + Number(totSplit[1]) * 60);
 
 
-    return diferencaEmSeg;
 
-}
-
-function finalizarTicket(codigo) {
-    let url = `http://localhost:3000/tickets/saida/${codigo}`
-
-    let res = axios.patch(url).then(response => {
-        if (response.data) { }
-    })
-        .catch(error => {
-            if (error.response) {
-                exibirMensagem("Ops! Algo deu errado!", "Houve um erro interno, por favor tentar novamente");
-            }
-        })
-}
-
-function recuperaHHMMatual() {
-    var data = new Date();
-    var horaAtual = data.getHours().toString();
-    var minutosAtuais = data.getMinutes().toString();
-    var horaEminutos = horaAtual + ":" + minutosAtuais;
-
-    return horaEminutos;
-}

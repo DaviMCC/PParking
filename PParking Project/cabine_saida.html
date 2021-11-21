@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
 
-        <meta charset="UTF-8">
-        <title>Cabine de Saída - PParking</title>
-        <link rel="icon" type="image/jpg" href="images/icone_pp.png" />
-        <link rel="stylesheet" href="CSS/reset.css">
-        <link rel="stylesheet" href="CSS/saida_style.css">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script type="text/javascript" src="JS/saida_script.js"></script>
+<head>
 
-    </head>
-    <body>
-        <header>
-            <div class="caixa-apresentacao">
-                <h1 class="logo-header"><a href="cabine_saida.html"><img src ="images/logo.png" alt="PParking logotipo"></a></h1>
-                <h1 class="titulo-site">Cabine de Saída</h1>
+    <meta charset="UTF-8">
+    <title>Cabine de Saída - PParking</title>
+    <link rel="icon" type="image/jpg" href="images/icone_pp.png" />
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="CSS/saida_style.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="JS/saida_script.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="caixa-apresentacao">
+            <h1 class="logo-header"><a href="cabine_saida.html"><img src="images/logo.png" alt="PParking logotipo"></a>
+            </h1>
+            <h1 class="titulo-site">Cabine de Saída</h1>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div id="div-instrucao" class="p1">
+                <h1 id="mensagem-inicial">Valide sua saída aqui</h1>
+                <p id="mensagem-instrucao">Insira o número do seu ticket para validar a sua saída</p>
             </div>
-        </header>
-         
-        <main>
-            <section>
-                <div id="div-instrucao" class="p1">
-                    <h1 id="mensagem-inicial">Valide sua saída aqui</h1>
-                    <p id="mensagem-instrucao">Insira o número do seu ticket para validar a sua saída</p>
-                </div>
-                    <div  class="digitacao-e-verificacao">
-                        <form onsubmit="verificarTicket();return false">
-                            <input type="text" id="campo-insercao-dados" placeholder="Digite o número do ticket" required="required" maxlength="8" minlength="8" name="numero" /><br>
-                            <input type="submit" id="botao-submit" value="Verificar" />
-                        </form>
-                    </div>
-            </section>
-        </main>
-        <footer>
-            <p>Copyright &copy; - 2021 - PParking </p>
-        </footer>
-    </body>
+            <div class="digitacao-e-verificacao">
+                <form onsubmit="executarSaida();return false">
+                    <input type="text" id="campo-insercao-dados" placeholder="Digite o número do ticket"
+                        required="required" maxlength="8" minlength="8" name="numero"
+                        style="text-transform:uppercase" /><br>
+                    <input type="submit" id="botao-submit" value="Verificar" />
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &copy; - 2021 - PParking </p>
+    </footer>
+</body>
+
 </html>

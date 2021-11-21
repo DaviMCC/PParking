@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 function BD() {
 	process.env.ORA_SDTZ = 'UTC-3';
 
@@ -6,6 +8,7 @@ function BD() {
 			return global.conexao;
 
 		const oracledb = require('oracledb');
+		oracledb.autoCommit = true;
 		const dbConfig = require('./dbconfig.js');
 
 		try {
@@ -29,7 +32,7 @@ function BD() {
 				'DATA_ENTRADA VARCHAR(20) NOT NULL, DATA_SAIDA VARCHAR(20),' +
 				'DATA_PAGAMENTO VARCHAR(20),' +
 				'STATUS_TICKET VARCHAR(12) NOT NULL,' +
-				'VALOR_ESTADIA VARCHAR(12))'
+				'VALOR_ESTADIA NUMBER(12))'
 			await conexao.execute(sql);
 			console.log('Tabelas não existiam e foram criadas com sucesso!');
 
@@ -69,14 +72,6 @@ function acoesTicket(bd) {
 
 	}
 
-	this.recupereTodosTickets = async function () {
-		const conexao = await this.bd.getConexao();
-
-		const sql = "SELECT * FROM TICKETS";
-		ret = await conexao.execute(sql);
-
-		return ret.rows;
-	}
 
 	this.recupereTodosTicketsPorStatus = async function (status) {
 		const conexao = await this.bd.getConexao();
@@ -124,10 +119,22 @@ function acoesTicket(bd) {
 
 	}
 
+	this.executaPagamento = async function (codigo, pagamento) {
+		const conexao = await this.bd.getConexao();
+
+		const sql = "UPDATE TICKETS SET STATUS_TICKET=:0, DATA_PAGAMENTO=to_char(sysdate,'dd/mm/yyyy hh24:mi'), VALOR_ESTADIA=:1  WHERE CODIGO=:2";
+		const dados = ['DESBLOQUEADO', pagamento, codigo];
+		await conexao.execute(sql, dados);
+
+		const sql2 = 'COMMIT';
+		await conexao.execute(sql2);
+
+	}
+
 	this.verificaVeiculoAtivoNoEstacionamento = async function (placa) {
 		const conexao = await this.bd.getConexao();
 
-		const sql = "SELECT * FROM Tickets WHERE PLACA=:0 AND STATUS_TICKET != 'Finalizado'";
+		const sql = "SELECT * FROM Tickets WHERE PLACA=:0 AND STATUS_TICKET != 'FINALIZADO'";
 
 		const dados = [placa];
 
@@ -153,10 +160,9 @@ function Ticket(codigo, placa, dataEntrada, dataSaida, dataPagamento, status, va
 
 }
 
-function Comunicado(codigo, mensagem, descricao) {
+function Comunicado(codigo, mensagem) {
 	this.codigo = codigo;
 	this.mensagem = mensagem;
-	this.descricao = descricao;
 }
 
 function middleWareGlobal(req, res, next) {
@@ -173,17 +179,14 @@ function middleWareGlobal(req, res, next) {
 
 async function inclusaoEntrada(req, res) {
 	if (!req.body.placa) {
-		const erro1 = new Comunicado('DdI', 'Placa de veículo necessária',
-			'Não foram informados os dados do veículo');
-		return res.status(422).json(erro1);
+		const erro1 = new Comunicado('DF', 'Dados faltando');
+		return res.status(400).json(erro1);
 	}
-
 
 	let jaEstaNoEstacionamento = await global.acoesTicket.verificaVeiculoAtivoNoEstacionamento(req.body.placa);
 
 	if (jaEstaNoEstacionamento == true) {
-		const erro2 = new Comunicado('PPVE', 'Placa pertence a um veiculo ativo',
-			'A placa informada pertence a um veiculo que se encontra dentro do estacionamento.');
+		const erro2 = new Comunicado('PPVE', 'Placa pertence a um veiculo ativo');
 		return res.status(409).json(erro2);
 	}
 
@@ -200,35 +203,7 @@ async function inclusaoEntrada(req, res) {
 	}
 	catch (error) {
 		console.log(erro);
-		const erro1 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível salvar as informações');
-		return res.status(500).json(erro1);
-	}
-}
-
-async function recuperacaoDeTodosTickets(req, res) {
-	if (req.body.codigo || req.body.placa || req.body.data) {
-		const erro = new Comunicado('JSP', 'JSON sem propósito',
-			'Foram disponibilizados dados em um JSON sem necessidade');
-		return res.status(422).json(erro);
-	}
-
-	try {
-		let rec = await global.acoesTicket.recupereTodosTickets();
-
-		if (rec.length == 0) {
-			return res.status(200).json([]);
-		}
-		else {
-			const ret = [];
-			for (i = 0; i < rec.length; i++) ret.push(new Ticket(rec[i][0], rec[i][1], rec[i][2]));
-			return res.status(200).json(ret);
-		}
-	}
-	catch (erro) {
-		console.log(erro);
-		const erro1 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível recuperar as informações');
+		const erro1 = new Comunicado('EI', 'Erro Interno');
 		return res.status(500).json(erro1);
 	}
 }
@@ -292,6 +267,40 @@ async function recuperaTicketPorCodigo(req, res) {
 
 }
 
+async function checkout(req, res) {
+	if (req.body.length > 0) {
+		const erro1 = new Comunicado('JSP', 'JSON sem propósito')
+		return res.status(422).json(erro1);
+	}
+
+	const codigo = req.params.codigo;
+
+	try {
+		let ret = await global.acoesTicket.recuperaUmTicket(codigo);
+
+		if (ret.length == 0) {
+			const erro2 = new Comunicado('LNE', 'Ticket inexistente');
+			return res.status(404).json(erro2);
+		}
+		else {
+			ret = ret[0];
+			ret = new Ticket(ret[0], ret[1], ret[2], ret[3], ret[4], ret[5], ret[6]);
+			var sucesso = executarCheckout(ret);
+			if (sucesso.codigo == "TPF" || sucesso.codigo == "EG") {
+				return res.status(400).json(sucesso);
+			} else if (sucesso.placa) {
+				return res.status(200).json(sucesso);
+			}
+		}
+
+	}
+	catch (erro) {
+		const erro3 = new Comunicado('EI', 'Erro Interno');
+		return res.status(500).json(erro3);
+	}
+
+}
+
 async function atualizaStatusTicket(req, res) {
 	if (!req.body.status) {
 		const erro1 = new Comunicado('DNI', 'Dados não informados',
@@ -312,30 +321,167 @@ async function atualizaStatusTicket(req, res) {
 	}
 }
 
-async function finalizaTicket(req, res) {
+async function efetuaSaida(req, res) {
 	if (req.body.length > 0) {
-		const erro1 = new Comunicado('JSP', 'JSON sem propósito',
-			'Foram disponibilizados dados em um JSON sem necessidade');
+		const erro1 = new Comunicado('JSP', 'JSON sem propósito');
 		return res.status(422).json(erro1);
 	}
 
 	try {
-		await global.acoesTicket.finalizaUmTicket(req.params.codigo)
-		const sucesso = new Comunicado('AE', 'Atualização efetuada',
-			'O status do ticket e data de saida foram atualizados com sucesso');
-		return res.status(201).json(sucesso);
+
+		let ticket =  await global.acoesTicket.recuperaUmTicket(req.params.codigo);
+		if(ticket.length == 0){
+		const comunicado = new Comunicado("TNE", "Ticket não encontrado");
+		return res.status(400).json(comunicado);
+		}
+
+		ticket = ticket[0];
+		ticket = new Ticket(ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], ticket[5], ticket[6], ticket[7]);
+
+		const sucesso = executaSaida(ticket);
+		if (sucesso.codigo == "SVS" || sucesso.codigo == "SVSEG") {
+			await global.acoesTicket.finalizaUmTicket(ticket.codigo);
+			return res.status(201).json(sucesso);
+		}else{
+			return res.status(400).json(sucesso);
+		}
 	}
 	catch (error) {
 		console.log(error);
-		const erro3 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível atualizar as informações');
+		const erro3 = new Comunicado('EI', 'Erro Interno');
 		return res.status(500).json(erro3);
 	}
 }
 
-async function ping(req, res) {
+async function pagaTicket(req, res) {
+	if (!req.body.pagamento) {
+		const erro1 = new Comunicado('IF', 'Informações faltando na requisição');
+		return res.status(400).json(erro1);
+	}
 
-	return res.status(200).json();
+	try {
+		await global.acoesTicket.executaPagamento(req.params.codigo, req.body.pagamento)
+		const sucesso = new Comunicado('PES', 'Pagamento efetuado com sucesso');
+		return res.status(200).json(sucesso);
+	}
+	catch (error) {
+		console.log(error);
+		const erro3 = new Comunicado('EI', 'Erro Interno',);
+		return res.status(500).json(erro3);
+	}
+}
+
+function executaSaida(ticket) {
+
+	if (ticket.status == "DESBLOQUEADO") {
+		const comunicado = new Comunicado("SVS", "Saída validada com sucesso");
+		return comunicado;
+	}
+	else if (ticket.status == "BLOQUEADO") {
+
+		var horasDePermanenciaEmSegundos = calculaDiferencaEntreHoras(ticket.dataEntrada.slice(ticket.dataEntrada.length - 5));
+		var diasDePermanencia = calculaDiferencaEntreDias(ticket.dataEntrada);
+
+		if (horasDePermanenciaEmSegundos <= 900 && diasDePermanencia == 0) {
+			const comunicado = new Comunicado("SVSEG", "Saída validada com sucesso, estadia gratuita.");
+			return comunicado;
+		} else if (permanenciaTotalEmSegundos <= 900) {
+			const comunicado = Comunicado("SNV", "Saída não validada, pagamento pendente.");
+			return comunicado;
+		}
+	}
+	else if (ticket.status == "FINALIZADO") {
+		const comunicado = new Comunicado("TJF", "Ticket já finalizado.");
+		return comunicado;
+	}
+
+}
+
+function executarCheckout(ticket) {
+
+	if (ticket.status == "FINALIZADO" || ticket.status == "DESBLOQUEADO") {
+		const erro1 = new Comunicado('TPF', 'Ticket Pago ou Finalizado');
+		return (erro1);
+	}
+	var horasDePermanenciaEmSegundos = calculaDiferencaEntreHoras(ticket.dataEntrada.slice(ticket.dataEntrada.length - 5));
+	var diasDePermanencia = calculaDiferencaEntreDias(ticket.dataEntrada);
+
+	if (horasDePermanenciaEmSegundos <= 900 && diasDePermanencia == 0) {
+		const erro2 = new Comunicado('EG', 'Estadia gratuita');
+		return (erro2);
+	} else {
+
+		var valorEstadia = calculaEstadia(horasDePermanenciaEmSegundos, ticket.dataEntrada);
+		var dataDeSaida = moment().format("DD/MM/YY HH:mm");
+		var permanenciaTotal = calculaPermanenciaTotal(horasDePermanenciaEmSegundos, diasDePermanencia);
+
+		ticket = { codigo: ticket.codigo, placa: ticket.placa, dataEntrada: ticket.dataEntrada, dataSaida: dataDeSaida, permanencia: permanenciaTotal, total: valorEstadia };
+
+		return ticket;
+	}
+
+}
+
+function calculaDiferencaEntreHoras(hhmmEntrada) {
+
+	var hhmmAtual = moment().format("DD/MM/YYYY HH:mm").substring(11, 16);
+
+	var inicial = hhmmEntrada, final = hhmmAtual;
+
+	var splInicial = inicial.split(":"), splFinal = final.split(":");
+
+	var inicialMin = (Number(splInicial[0] * 60)) + Number(splInicial[1]);
+	var finalMin = (Number(splFinal[0] * 60)) + Number(splFinal[1]);
+
+	var totalMin = Math.abs(Number(finalMin - inicialMin));
+	var tot = Math.trunc(totalMin / 60).toString() + ":" + (totalMin % 60).toString();
+
+	var totSplit = tot.split(":");
+	var diferencaEmSeg = (Number(totSplit[0] * 3600) + Number(totSplit[1]) * 60);
+
+	return diferencaEmSeg;
+}
+
+function calculaDiferencaEntreDias(dataEntrada) {
+
+	var d1 = dataEntrada.substring(0, 10);
+	var d2 = moment().format("DD/MM/YYYY");
+	var diff = moment(d2, "DD/MM/YYYY").diff(moment(d1, "DD/MM/YYYY"));
+	return moment.duration(diff).asDays();
+}
+
+function calculaPermanenciaTotal(diferencaEntreHoras, diasDePermanencia) {
+	segundos = diferencaEntreHoras;
+
+	var minutos = Math.floor(segundos / 60);
+	segs = segundos % 60;
+	var horas = Math.floor(minutos / 60)
+	minutos = minutos % 60;
+
+	if (minutos == 0) {
+		minutos + "0";
+	}
+
+	return { pernoite: diasDePermanencia, horas: horas, minutos: minutos }
+}
+
+function calculaEstadia(tempoPermanenciaEmSeg, dataEntrada) {
+
+	var totAPagar = Math.floor(calculaDiferencaEntreDias(dataEntrada)) * 40;
+
+	if (tempoPermanenciaEmSeg <= 900) {
+		totAPagar += 0;
+	} else if (tempoPermanenciaEmSeg <= 10800) {
+		totAPagar += 12;
+	} else if (tempoPermanenciaEmSeg > 10800) {
+		totAPagar += 12;
+		while (tempoPermanenciaEmSeg > 10800) {
+			totAPagar += 1;
+			tempoPermanenciaEmSeg -= 3600;
+		}
+	}
+
+	return totAPagar;
 }
 
 async function ativacaoDoServidor() {
@@ -352,13 +498,13 @@ async function ativacaoDoServidor() {
 	app.use(cors())
 	app.use(middleWareGlobal);
 
-	app.post('/entrada', inclusaoEntrada);
-	app.get('/tickets', recuperacaoDeTodosTickets);
-	app.get('/tickets/status/:status', recuperacaoDeTodosPorStatus);
+	app.post('/entrada', inclusaoEntrada); 
+	app.get('/tickets/status/:status', recuperacaoDeTodosPorStatus); 
 	app.get('/tickets/codigo/:codigo', recuperaTicketPorCodigo);
+	app.get('/tickets/checkout/:codigo', checkout); 
 	app.patch('/tickets/status/:codigo', atualizaStatusTicket);
-	app.patch('/tickets/saida/:codigo', finalizaTicket);
-	app.get('/ping', ping);
+	app.get('/tickets/saida/:codigo', efetuaSaida);
+	app.patch('/tickets/pagamento/:codigo', pagaTicket);
 
 	console.log('Servidor ativo na porta 3000...');
 	app.listen(3000);

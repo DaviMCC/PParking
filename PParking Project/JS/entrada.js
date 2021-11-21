@@ -42,16 +42,14 @@ function retornarHome() {
     return false;
 }
 
-function Placa(placa) {
-    this.placa = placa;
-}
+
 
 function gerarTicket() {
-    let placa = document.getElementById('campo-insercao-dados').value
+    let placa = document.getElementById('campo-insercao-dados').value.toUpperCase();
 
     if (placa !== "") {
         let url = `http://localhost:3000/entrada`
-        let body = new Placa(placa);
+        let body = { placa: placa };
 
         let res = axios.post(url, body)
             .then(response => {
@@ -61,20 +59,14 @@ function gerarTicket() {
             })
             .catch(error => {
 
-                if (error.response) {
+                if (error.response.data.codigo == "PPVE") {
 
-                    alertarErro(error.response.data.descricao);
+                    alertarErro("A placa inserida já pertence a um veículo estacionado.");
 
+                }
+                else {
+                    alertarErro("Erro interno , por favor tente novamente.");
                 }
             })
     }
-}
-
-function mascara(i) {
-
-    var v = i.value;
-
-    i.setAttribute("maxlength", "7");
-    if (v.length == 3) i.value += "-";
-
 }

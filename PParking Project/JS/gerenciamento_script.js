@@ -1,5 +1,11 @@
 function limpaDados(){
-    document.getElementById("titulo-dados").innerHTML = "";
+    const person = {
+        name: "teste",
+        teste: 30,
+        teste: "teste"
+      }
+      document.getElementById("titulo-dados").innerHTML = person.name + person.age;
+
 }
 
 function getBloqueados()
