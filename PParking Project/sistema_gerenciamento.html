@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="CSS/reset.css">
         <link rel="stylesheet" href="CSS/gerenciamento_style.css">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script type="text/javascript" src="JS/gerenciamento_script.js"></script>
 
 
@@ -33,9 +34,22 @@
             </nav>
         <main>
             <article>
-                <h2 id="titulo-busca">Seja Bem-vindo ao sistema de gerenciamento</h2>
+                <h2 id="titulo-busca">Seja bem-vindo ao sistema!</h2>
                 <div class="dados-busca">
-                    <p id="titulo-dados">Selecione uma das opções do menu para verificar os dados referentes a ela.</p>
+                    <p id="mensagem">Selecione uma opção no menu acima para exibir informações</p>
+                    <table id ="tabela">
+                          <thead>
+                          </thead> 
+                          <tbody>
+                          </tbody>
+                    </table>
+                </div>
+                <div class="div-insercao-dados">
+                    <form onsubmit="gerarTicket(); return false;">
+                        <input type="date" id="campo-insercao-dados" placeholder="DD/MM/AAAA"
+                            required="required"  name=data maxlength="10" minlength="10" />
+                        <input type="submit" id="botao-submit" value="Gerar Faturamento" />
+                    </form>
                 </div>
             </article>
         </main>

@@ -80,7 +80,7 @@ body {
 
 main{
     width: 80%;
-    min-width: 1140px;
+    min-width: 1110px;
     margin: 0 auto;
 }
 
@@ -91,16 +91,17 @@ article{
     border: 4px outset #f58220;
     height: 750px;
     max-height: 750px;
-    max-width: 1550px;
+    max-width: 1250px;
     margin: 60px auto;
     overflow: auto;
+
 }
 
 #titulo-busca{
     border-bottom: 3px solid #ee9d25;
     margin: 15px;
     padding-left: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     font-weight: bold;
 
     font-size: 34px;
@@ -108,15 +109,111 @@ article{
     text-shadow: 2px 2px 2px cornsilk;
 }
 
-.dados-busca p{
-    padding: 0 25px;
+.div-insercao-dados {
+    padding-top: 40px;
+    display: none;
+}
 
+#campo-insercao-dados{
+    
+    height: 40px;
+    width: 250px;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    border-radius: 5px;
+    border: 3px groove #f58220;
+    padding: 40px;
+    margin: 80px auto;
+    display: block;
+}
+
+#campo-insercao-dados::placeholder{
+    font-size: 18px;
+    text-transform: none;
+
+}
+
+#campo-insercao-dados:focus{
+    
+    outline: none !important;
+    border: 3px groove  #ffbd59;
+    transition-duration: 0.3s;
+
+}
+
+#botao-submit {
+
+    padding: 30px;
+    margin: 0px auto;
+    margin-top: 40px;
+    display: block;
+    width: 300px;
+
+    font-weight: bold;
+    font-size: 25px;
+    font-family: Montserrat;
+
+    color: white;
+    border: 2px outset #f58220;
+    border-radius: 5px;
+    background:url(https://www.transparenttextures.com/patterns/diagonal-striped-brick.png) repeat #f58220;
+
+}
+
+#botao-submit:focus{
+
+    background-color: #ffbd59;
+    transition-duration: 0.3s;
+
+}
+
+.dados-busca table{
+    margin: 15px;
+    overflow: auto;
+}
+
+.dados-busca  p{
+    margin: 15px;
+    padding: 10px;
     font-size: 30px;
     color: #f58220;
+    text-shadow: 2px 2px 2px cornsilk;
+}
 
-    border-bottom: 3px solid #ee9d25;
-    margin: 15px;
+.dados-busca td, th{
+    padding: 0 25px;
+    
+}
 
+.dados-busca table{
+    min-width: 100px;
+    width: 98%;
+    max-width: 1220px;
+}
+
+.dados-busca td{
+    padding: 10px;
+    font-size: 30px;
+    color: #f58220;
+    border-bottom: 3px solid #f58220;
+    border: 3px outset #f58220;
+
+    text-align: left;
+    text-shadow: 2px 2px 2px cornsilk;
+}
+
+.dados-busca th{
+    border: 3px outset #f58220;
+    color: cornsilk;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 25px;
+    text-align: left;
+    background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
 }
 
 #titulo-dados{
@@ -129,7 +226,7 @@ footer{
     background:url(https://www.transparenttextures.com/patterns/noise-pattern-with-subtle-cross-lines.png) repeat #f58220;
     position: absolute;
     width: 100%;
-    min-width: 1140px;
+    min-width: 1100px;
     margin: 30px auto; 
 
 }

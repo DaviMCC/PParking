@@ -76,11 +76,25 @@ function acoesTicket(bd) {
 	this.recupereTodosTicketsPorStatus = async function (status) {
 		const conexao = await this.bd.getConexao();
 
-		const sql = "SELECT * FROM TICKETS WHERE STATUS_TICKET =:0";
+		let sql;
 
-		const dados = [status];
+		sql = "select * from tickets where status_ticket =:0";
+		
+		const dados = [status.toUpperCase()];
 
 		ret = await conexao.execute(sql, dados);
+
+		return ret.rows;
+	}
+
+	this.recuperarFaturamento = async function (dia) {
+		const conexao = await this.bd.getConexao();
+
+		let sql;
+
+		sql = "SELECT sum (valor_estadia), count(*) FROM TICKETS where data_pagamento LIKE '%" + dia + "%'";
+		
+		ret = await conexao.execute(sql);
 
 		return ret.rows;
 	}
@@ -210,9 +224,13 @@ async function inclusaoEntrada(req, res) {
 
 async function recuperacaoDeTodosPorStatus(req, res) {
 	if (req.body.length > 0) {
-		const erro1 = new Comunicado('JSP', 'JSON sem propósito',
-			'Foram disponibilizados dados em um JSON sem necessidade');
+		const erro1 = new Comunicado('JSP', 'JSON sem propósito');
 		return res.status(422).json(erro1);
+	}
+
+	if(req.params.status != "desbloqueado" && req.params.status != "bloqueado" && req.params.status != "finalizado"){
+		const erro2 = new Comunicado('SI', 'Status inválido');
+		return res.status(400).json(erro2);
 	}
 
 	try {
@@ -223,14 +241,38 @@ async function recuperacaoDeTodosPorStatus(req, res) {
 		}
 		else {
 			const ret = [];
-			for (i = 0; i < rec.length; i++) ret.push(new Ticket(rec[i][0], rec[i][1], rec[i][2]));
+			for (i = 0; i < rec.length; i++) ret.push(new Ticket(rec[i][0], rec[i][1], rec[i][2], rec[i][3], rec[i][4], rec[i][5], rec[i][6], rec[i][7]));
 			return res.status(200).json(ret);
 		}
 	}
 	catch (erro) {
 		console.log(erro);
-		const erro1 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível recuperar as informações');
+		const erro1 = new Comunicado('EI', 'Erro Interno');
+		return res.status(500).json(erro1);
+	}
+}
+
+async function executarFaturamento(req, res) {
+	if (req.body.length > 0) {
+		const erro1 = new Comunicado('DF', 'Dados faltando');
+		return res.status(422).json(erro1);
+	}
+
+	try {
+		let rec = await global.acoesTicket.recuperarFaturamento(req.body.data);
+		let a = req.body.data;
+		if (rec.length == 0) {
+			return res.status(200).json([]);
+		}
+		else {
+			const ret = [];
+			faturamento = {faturamentoTotal:rec[0][0], ticketsPagos:rec[0][1]}
+			return res.status(200).json(faturamento);
+		}
+	}
+	catch (erro) {
+		console.log(erro);
+		const erro1 = new Comunicado('EI', 'Erro Interno');
 		return res.status(500).json(erro1);
 	}
 }
@@ -299,26 +341,6 @@ async function checkout(req, res) {
 		return res.status(500).json(erro3);
 	}
 
-}
-
-async function atualizaStatusTicket(req, res) {
-	if (!req.body.status) {
-		const erro1 = new Comunicado('DNI', 'Dados não informados',
-			'Não foram informados os dados a serem atualizados');
-		return res.status(422).json(erro1);
-	}
-
-	try {
-		await global.acoesTicket.atualizaStatusDeUmTicket(req.body.status, req.params.codigo)
-		const sucesso = new Comunicado('AE', 'Atualização efetuada',
-			'O status do ticket foi atualizado com sucesso');
-		return res.status(201).json(sucesso);
-	}
-	catch (error) {
-		const erro3 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível recuperar as informações');
-		return res.status(500).json(erro3);
-	}
 }
 
 async function efetuaSaida(req, res) {
@@ -412,7 +434,7 @@ function executarCheckout(ticket) {
 	} else {
 
 		var valorEstadia = calculaEstadia(horasDePermanenciaEmSegundos, ticket.dataEntrada);
-		var dataDeSaida = moment().format("DD/MM/YY HH:mm");
+		var dataDeSaida = moment().format("DD/MM/YYYY HH:mm");
 		var permanenciaTotal = calculaPermanenciaTotal(horasDePermanenciaEmSegundos, diasDePermanencia);
 
 		ticket = { codigo: ticket.codigo, placa: ticket.placa, dataEntrada: ticket.dataEntrada, dataSaida: dataDeSaida, permanencia: permanenciaTotal, total: valorEstadia };
@@ -502,7 +524,7 @@ async function ativacaoDoServidor() {
 	app.get('/tickets/status/:status', recuperacaoDeTodosPorStatus); 
 	app.get('/tickets/codigo/:codigo', recuperaTicketPorCodigo);
 	app.get('/tickets/checkout/:codigo', checkout); 
-	app.patch('/tickets/status/:codigo', atualizaStatusTicket);
+	app.post('/faturamento', executarFaturamento); 
 	app.get('/tickets/saida/:codigo', efetuaSaida);
 	app.patch('/tickets/pagamento/:codigo', pagaTicket);
 
