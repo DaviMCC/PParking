@@ -40,7 +40,6 @@ function exibirTicket(ticket) {
     return false;
 }
 
-
 function prosseguir() {
     document.getElementsByClassName("instrucao")[0].innerHTML = "Selecione o metodo de pagamento";
 

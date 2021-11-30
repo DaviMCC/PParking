@@ -65,7 +65,7 @@ function gerarTicket() {
 
                 }
                 else {
-                    alertarErro("Erro interno , por favor tente novamente.");
+                    alertarErro("Erro interno, por favor tente novamente.");
                 }
             })
     }

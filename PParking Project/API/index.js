@@ -277,38 +277,6 @@ async function executarFaturamento(req, res) {
 	}
 }
 
-async function recuperaTicketPorCodigo(req, res) {
-	if (req.body.length > 0) {
-		const erro1 = new Comunicado('JSP', 'JSON sem propósito',
-			'Foram disponibilizados dados em um JSON sem necessidade');
-		return res.status(422).json(erro1);
-	}
-
-	const codigo = req.params.codigo;
-
-	try {
-		let ret = await global.acoesTicket.recuperaUmTicket(codigo);
-
-		if (ret.length == 0) {
-			const erro2 = new Comunicado('LNE', 'Ticket inexistente',
-				'Não existe nenhum ticket com o código informado');
-			return res.status(404).json(erro2);
-		}
-		else {
-			ret = ret[0];
-			ret = new Ticket(ret[0], ret[1], ret[2], ret[3], ret[4], ret[5], ret[6]);
-			return res.status(200).json(ret);
-		}
-
-	}
-	catch (erro) {
-		const erro3 = new Comunicado('EI', 'Erro Interno',
-			'Não foi possível recuperar as informações');
-		return res.status(500).json(erro3);
-	}
-
-}
-
 async function checkout(req, res) {
 	if (req.body.length > 0) {
 		const erro1 = new Comunicado('JSP', 'JSON sem propósito')
@@ -407,8 +375,8 @@ function executaSaida(ticket) {
 		if (horasDePermanenciaEmSegundos <= 900 && diasDePermanencia == 0) {
 			const comunicado = new Comunicado("SVSEG", "Saída validada com sucesso, estadia gratuita.");
 			return comunicado;
-		} else if (permanenciaTotalEmSegundos <= 900) {
-			const comunicado = Comunicado("SNV", "Saída não validada, pagamento pendente.");
+		} else if (horasDePermanenciaEmSegundos > 900 || diasDePermanencia > 0) {
+			const comunicado = new Comunicado("SNV", "Saída não validada, pagamento pendente.");
 			return comunicado;
 		}
 	}
@@ -522,7 +490,6 @@ async function ativacaoDoServidor() {
 
 	app.post('/entrada', inclusaoEntrada); 
 	app.get('/tickets/status/:status', recuperacaoDeTodosPorStatus); 
-	app.get('/tickets/codigo/:codigo', recuperaTicketPorCodigo);
 	app.get('/tickets/checkout/:codigo', checkout); 
 	app.post('/faturamento', executarFaturamento); 
 	app.get('/tickets/saida/:codigo', efetuaSaida);

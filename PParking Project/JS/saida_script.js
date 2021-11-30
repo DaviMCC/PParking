@@ -13,15 +13,11 @@ function exibirMensagem(titulo, mensagem) {
 
     retornarHome();
 }
+
 function retornarHome() {
 
     setTimeout((() => { window.location.replace("cabine_saida.html") }), 10000);
 
-}
-
-function Ticket(status, horaEntrada) {
-    this.status = status;
-    this.horaEntrada = horaEntrada;
 }
 
 function executarSaida() {
@@ -44,7 +40,7 @@ function executarSaida() {
 
                 if (error.response.data.codigo == "TNE") {
 
-                    exibirMensagem("Ops! Algo deu errado!", "Por favor, insira um ticket válido.");
+                    exibirMensagem("Ops! Algo deu errado!", "Por favor, insira um ticket existente.");
                     console.log(error);
 
                 } else if (error.response.data.codigo == "EI") {
